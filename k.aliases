@@ -1,1 +1,2 @@
 alias k-set-ns="kubectl config set-context --current --namespace"
+alias k="kubectl"

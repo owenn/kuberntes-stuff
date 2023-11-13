@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  labels:
+    service: t-ingress
+  name: tingress
+  namespace: kube-system
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app.kubernetes.io/name: traefik
+  sessionAffinity: None
+status:
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: t-ingress
+  namespace: kube-system 
+spec:
+  rules:
+  - host: t.b
+    http:
+      paths:
+      - backend:
+          service:
+            name: tingress
+            port: 
+              number: 80
+        path: /
+        pathType: Prefix      
